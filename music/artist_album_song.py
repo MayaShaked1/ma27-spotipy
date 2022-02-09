@@ -60,9 +60,6 @@ class Artist:
     def add_song(self, song):
         self.songs.append(song)
 
-    def all_artist(self, artist):
-        self.all_artists.append(artist)
-
     def __repr__(self):
         return "<Test id:%s name:%s artist:%s album:%s popularity:%s>" % (
             self.id_number, self.name)

@@ -25,5 +25,5 @@ for file_name in [file for file in os.listdir(path_to_json) if file.endswith('.j
                 all_artists.append(artists)
             album = songs.Album(id_album, album_name, artists)
             album.add_track(id_song, song_name, artists)
-for art in all_artists:
-    print(art)
+# for art in all_artists:
+#     print(art)

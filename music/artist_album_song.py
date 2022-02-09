@@ -28,13 +28,11 @@ class Album:
 
         artist.add_album(self)
 
-    def add_track(self, id_number, name, artist=None):
+    def add_track(self, id_number, name, popularity, artist=None):
         if artist is None:
             artist = self.artist
 
-        track_number = len(self.tracks)
-
-        song = Song(id_number, name, artist, self, track_number)
+        song = Song(id_number, name, popularity, artist, self)
 
         self.tracks.append(song)
 
@@ -54,12 +52,16 @@ class Artist:
 
         self.albums = []
         self.songs = []
+        self.all_artists = []
 
     def add_album(self, album):
         self.albums.append(album)
 
     def add_song(self, song):
         self.songs.append(song)
+
+    def all_artist(self, artist):
+        self.all_artists.append(artist)
 
     def __repr__(self):
         return "<Test id:%s name:%s artist:%s album:%s popularity:%s>" % (
@@ -68,6 +70,3 @@ class Artist:
     def __str__(self):
         return "id is %s, name is %s" % (
             self.id_number, self.name)
-
-
-

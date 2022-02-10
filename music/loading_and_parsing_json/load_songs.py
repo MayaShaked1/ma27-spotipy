@@ -5,9 +5,9 @@ from music.searching import searching_options as search
 
 path_to_json = r'D:\Users\Maya\course\gitCodesPython\spotipy\songs\\'  # the path from content root does not work
 all_artists = []  # unique list of all the artists
-artist_all_albums = [] #albums name of each artist
-all_songs_sorted_each_artist = [] #list of all the songs of each artist
-songs_in_album = [] #lsit of all the songs in each albums
+artist_all_albums = []  # albums name of each artist
+all_songs_sorted_each_artist = []  # list of all the songs of each artist
+songs_in_album = []  # list of all the songs in album
 for file_name in [file for file in os.listdir(path_to_json) if file.endswith('.json')]:
     path = path_to_json + file_name
     with open((path_to_json + file_name), 'r') as json_file:
@@ -37,3 +37,19 @@ for file_name in [file for file in os.listdir(path_to_json) if file.endswith('.j
             songs_in_album.append({album_artist.id_number: [song.name]})
         else:
             songs_in_album = search.all_songs_album(id_album, song_name, songs_in_album)
+
+
+def all_artists_lists():
+    return all_artists
+
+
+def artist_all_albums():
+    return artist_all_albums
+
+
+def all_songs_sorted_each_artist():
+    return all_songs_sorted_each_artist
+
+
+def songs_in_album():
+    return songs_in_album

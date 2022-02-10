@@ -67,3 +67,12 @@ class Artist:
     def __str__(self):
         return "id is %s, name is %s" % (
             self.id_number, self.name)
+
+
+class Playlist:
+    def __init__(self, name):
+        self.name = name
+        self.songs = []
+
+    def add_song(self, song):
+        self.songs.append(song)

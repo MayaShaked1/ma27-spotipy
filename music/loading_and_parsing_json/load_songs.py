@@ -5,14 +5,14 @@ from music.searching import searching_options as search
 
 path_to_json = r'D:\Users\Maya\course\gitCodesPython\spotipy\songs\\'  # the path from content root does not work
 all_artists = []  # unique list of all the artists
-artist_all_albums = []
-all_songs_sorted_each_artist = []
+artist_all_albums = [] #albums name of each artist
+all_songs_sorted_each_artist = [] #list of all the songs of each artist
+songs_in_album = [] #lsit of all the songs in each albums
 for file_name in [file for file in os.listdir(path_to_json) if file.endswith('.json')]:
     path = path_to_json + file_name
-    count = 0
     with open((path_to_json + file_name), 'r') as json_file:
         data = json.load(json_file)
-        #print(data)
+        print(data)
         id_song = data["track"]["id"]
         song_name = data["track"]["name"]
         popularity_score_song = data["track"]["popularity"]
@@ -28,30 +28,12 @@ for file_name in [file for file in os.listdir(path_to_json) if file.endswith('.j
                 all_artists.append(artists)
             if not search.songs_artist(artists, artist_all_albums):
                 artist_all_albums.append({id_artist: [album_artist.name]})
-                all_songs_sorted_each_artist.append({id_artist: [[song.name,song.popularity]]})
+                all_songs_sorted_each_artist.append({id_artist: [[song.name, song.popularity]]})
             else:
-                artist_all_albums=search.songs_artist_is_exist(artists, album_name, artist_all_albums)
-                search.sorted_songs_artist_is_exist(artists,song_name,popularity_score_song,all_songs_sorted_each_artist)
-                #all_songs_sorted_each_artist=search.sorted_songs_artist_is_exist(artists,song,all_songs_sorted_each_artist)
-
-            # all_artists.append({id_artist:[album_name]})
-            # all_artists.append({id_artist: [search.]})
-            # for check_artist in all_artists:  # is the artist already exist?
-            #     if check_artist.id_number == id_artist:
-            #         is_exist = True
-            # if not is_exist:
-            #     all_artists.append(artists)
-            # album = songs.Album(id_album, album_name, artists)
-            # album.add_track(id_song, song_name, artists)
-    count += 1
-# for art in all_artists:
-#     print(art)
-# for album in artist_all_albums:
-#     print(album)
-print()
-for song in all_songs_sorted_each_artist:
-    print(song)
-
-# s={'3MZsBdqDrRTJihTHQrO6Dq': [['SLOW DANCING IN THE DARK', 86]]}
-# s['3MZsBdqDrRTJihTHQrO6Dq'].append([1])
-# print(s)
+                artist_all_albums = search.songs_artist_is_exist(artists, album_name, artist_all_albums)
+                search.sorted_songs_artist_is_exist(artists, song_name, popularity_score_song,
+                                                    all_songs_sorted_each_artist)
+        if not search.album_already_exist(album_artist, songs_in_album):
+            songs_in_album.append({album_artist.id_number: [song.name]})
+        else:
+            songs_in_album = search.all_songs_album(id_album, song_name, songs_in_album)

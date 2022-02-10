@@ -12,7 +12,6 @@ for file_name in [file for file in os.listdir(path_to_json) if file.endswith('.j
     path = path_to_json + file_name
     with open((path_to_json + file_name), 'r') as json_file:
         data = json.load(json_file)
-        print(data)
         id_song = data["track"]["id"]
         song_name = data["track"]["name"]
         popularity_score_song = data["track"]["popularity"]
@@ -39,17 +38,18 @@ for file_name in [file for file in os.listdir(path_to_json) if file.endswith('.j
             songs_in_album = search.all_songs_album(id_album, song_name, songs_in_album)
 
 
-def all_artists_lists():
-    return all_artists
-
-
-def artist_all_albums():
-    return artist_all_albums
-
-
-def all_songs_sorted_each_artist():
-    return all_songs_sorted_each_artist
-
-
-def songs_in_album():
-    return songs_in_album
+# class Getter:
+#     def all_artists_lists(self):
+#         return all_artists
+#
+#
+#     def artist_all_albums(self):
+#         return artist_all_albums
+#
+#
+#     def all_songs_sorted_each_artist(self):
+#         return all_songs_sorted_each_artist
+#
+#
+#     def songs_in_album(self):
+#         return songs_in_album

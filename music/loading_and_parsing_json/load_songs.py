@@ -6,11 +6,13 @@ from music.searching import searching_options as search
 path_to_json = r'D:\Users\Maya\course\gitCodesPython\spotipy\songs\\'  # the path from content root does not work
 all_artists = []  # unique list of all the artists
 artist_all_albums = []
+all_songs_sorted_each_artist = []
 for file_name in [file for file in os.listdir(path_to_json) if file.endswith('.json')]:
     path = path_to_json + file_name
     count = 0
     with open((path_to_json + file_name), 'r') as json_file:
         data = json.load(json_file)
+        #print(data)
         id_song = data["track"]["id"]
         song_name = data["track"]["name"]
         popularity_score_song = data["track"]["popularity"]
@@ -26,8 +28,11 @@ for file_name in [file for file in os.listdir(path_to_json) if file.endswith('.j
                 all_artists.append(artists)
             if not search.songs_artist(artists, artist_all_albums):
                 artist_all_albums.append({id_artist: [album_artist.name]})
+                all_songs_sorted_each_artist.append({id_artist: [[song.name,song.popularity]]})
             else:
                 artist_all_albums=search.songs_artist_is_exist(artists, album_name, artist_all_albums)
+                search.sorted_songs_artist_is_exist(artists,song_name,popularity_score_song,all_songs_sorted_each_artist)
+                #all_songs_sorted_each_artist=search.sorted_songs_artist_is_exist(artists,song,all_songs_sorted_each_artist)
 
             # all_artists.append({id_artist:[album_name]})
             # all_artists.append({id_artist: [search.]})
@@ -41,5 +46,12 @@ for file_name in [file for file in os.listdir(path_to_json) if file.endswith('.j
     count += 1
 # for art in all_artists:
 #     print(art)
-for album in artist_all_albums:
-    print(album)
+# for album in artist_all_albums:
+#     print(album)
+print()
+for song in all_songs_sorted_each_artist:
+    print(song)
+
+# s={'3MZsBdqDrRTJihTHQrO6Dq': [['SLOW DANCING IN THE DARK', 86]]}
+# s['3MZsBdqDrRTJihTHQrO6Dq'].append([1])
+# print(s)
